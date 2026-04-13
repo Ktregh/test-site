@@ -1,0 +1,29 @@
+backend:
+  name: github
+  repo: ВАШ-ЮЗЕР/my-company-site   # ← зміни на свій репо
+  branch: main
+
+media_folder: static/images/uploads
+public_folder: /images/uploads
+
+collections:
+  - name: pages
+    label: Сторінки
+    files:
+      - label: Головна
+        name: home
+        file: content/_index.md
+        fields:
+          - { label: Заголовок, name: title, widget: string }
+          - { label: Контент,   name: body,  widget: markdown }
+
+  - name: posts
+    label: Новини
+    folder: content/posts
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: Заголовок, name: title,   widget: string }
+      - { label: Дата,      name: date,    widget: datetime }
+      - { label: Опис,      name: summary, widget: text }
+      - { label: Текст,     name: body,    widget: markdown }
