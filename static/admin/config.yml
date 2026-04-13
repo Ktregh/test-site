@@ -2,31 +2,148 @@ backend:
   name: github
   repo: Ktregh/test-site
   branch: main
-  site_domain: building-landing.netlify.app   # ← додай цей рядок
+  site_domain: building-landing.netlify.app
 
-site_url: https://building-landing.netlify.app  # ← і цей
-
+site_url: https://building-landing.netlify.app
 media_folder: static/images/uploads
 public_folder: /images/uploads
 
 collections:
-  - name: pages
-    label: Сторінки
+  - name: landing
+    label: Лендінг
     files:
-      - label: Головна
-        name: home
-        file: content/_index.md
-        fields:
-          - { label: Заголовок, name: title, widget: string }
-          - { label: Контент,   name: body,  widget: markdown }
 
-  - name: posts
-    label: Новини
-    folder: content/posts
-    create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    fields:
-      - { label: Заголовок, name: title,   widget: string }
-      - { label: Дата,      name: date,    widget: datetime }
-      - { label: Опис,      name: summary, widget: text }
-      - { label: Текст,     name: body,    widget: markdown }
+      - label: Головний екран (Hero)
+        name: hero
+        file: data/hero.yml
+        fields:
+          - { label: Бейдж (рядок вгорі), name: badge, widget: string, default: "Набір відкрито прямо зараз" }
+          - { label: Заголовок рядок 1, name: title1, widget: string, default: "РОБОТА" }
+          - { label: Заголовок рядок 2, name: title2, widget: string, default: "НА СКЛАДІ" }
+          - { label: Заголовок рядок 3, name: title3, widget: string, default: "ОДЯГУ" }
+          - { label: Підзаголовок, name: subtitle, widget: text, default: "Офіційне оформлення, стабільна зарплата. Вийди на роботу вже через 3 дні після подачі заявки." }
+          - { label: Кнопка головна, name: btn_primary, widget: string, default: "Залишити заявку" }
+          - { label: Кнопка вторинна, name: btn_secondary, widget: string, default: "Переглянути вакансії" }
+          - label: Статистика
+            name: stats
+            widget: list
+            fields:
+              - { label: Число, name: num, widget: string }
+              - { label: Опис, name: label, widget: string }
+
+      - label: Переваги
+        name: advantages
+        file: data/advantages.yml
+        fields:
+          - { label: Заголовок секції, name: title, widget: string, default: "ПЕРЕВАГИ РОБОТИ" }
+          - label: Картки переваг
+            name: items
+            widget: list
+            fields:
+              - { label: Заголовок, name: title, widget: string }
+              - { label: Текст, name: text, widget: text }
+
+      - label: Вакансії
+        name: vacancies
+        file: data/vacancies.yml
+        fields:
+          - { label: Заголовок секції, name: title, widget: string, default: "АКТУАЛЬНІ ВАКАНСІЇ" }
+          - { label: Підзаголовок, name: subtitle, widget: text }
+          - label: Список вакансій
+            name: items
+            widget: list
+            fields:
+              - { label: Назва посади, name: title, widget: string }
+              - { label: Зарплата, name: salary, widget: string }
+              - label: Теги
+                name: tags
+                widget: list
+                field: { label: Тег, name: tag, widget: string }
+
+      - label: Умови роботи
+        name: conditions
+        file: data/conditions.yml
+        fields:
+          - { label: Заголовок секції, name: title, widget: string, default: "ЩО МИ ПРОПОНУЄМО" }
+          - label: Пункти умов
+            name: items
+            widget: list
+            fields:
+              - { label: Заголовок, name: title, widget: string }
+              - { label: Опис, name: text, widget: text }
+
+      - label: Етапи оформлення
+        name: steps
+        file: data/steps.yml
+        fields:
+          - { label: Заголовок секції, name: title, widget: string, default: "ЕТАПИ ОФОРМЛЕННЯ" }
+          - { label: Підзаголовок, name: subtitle, widget: text }
+          - label: Кроки
+            name: items
+            widget: list
+            fields:
+              - { label: Заголовок кроку, name: title, widget: string }
+              - { label: Опис кроку, name: text, widget: text }
+
+      - label: Відгуки
+        name: reviews
+        file: data/reviews.yml
+        fields:
+          - label: Цифри довіри
+            name: trust
+            widget: list
+            fields:
+              - { label: Число, name: num, widget: string }
+              - { label: Підпис, name: label, widget: string }
+          - label: Відгуки
+            name: items
+            widget: list
+            fields:
+              - { label: Текст відгуку, name: text, widget: text }
+              - { label: Ім'я, name: name, widget: string }
+              - { label: Посада та стаж, name: position, widget: string }
+
+      - label: FAQ
+        name: faq
+        file: data/faq.yml
+        fields:
+          - label: Питання та відповіді
+            name: items
+            widget: list
+            fields:
+              - { label: Питання, name: question, widget: string }
+              - { label: Відповідь, name: answer, widget: text }
+
+      - label: Форма заявки
+        name: form
+        file: data/form.yml
+        fields:
+          - { label: Заголовок, name: title, widget: string, default: "ПОЧНИ ПРАЦЮВАТИ ВЖЕ ЗАРАЗ" }
+          - { label: Опис, name: description, widget: text }
+          - label: Вакансії у списку форми
+            name: vacancies
+            widget: list
+            field: { label: Вакансія, name: item, widget: string }
+          - label: Графіки у списку форми
+            name: schedules
+            widget: list
+            field: { label: Графік, name: item, widget: string }
+
+      - label: Контактні дані та футер
+        name: contacts
+        file: data/contacts.yml
+        fields:
+          - { label: Назва компанії (логотип), name: company_name, widget: string, default: "СКЛАДРОБОТА" }
+          - { label: Телефон, name: phone, widget: string }
+          - { label: Email, name: email, widget: string }
+          - { label: Адреса складу, name: address, widget: text }
+          - { label: Текст у футері, name: footer_copy, widget: string, default: "© 2025 СкладРобота. Офіційне працевлаштування." }
+
+      - label: SEO налаштування
+        name: seo
+        file: data/seo.yml
+        fields:
+          - { label: Title сторінки, name: title, widget: string }
+          - { label: Meta description, name: description, widget: text }
+          - { label: Ключові слова, name: keywords, widget: string }
+          - { label: Google Analytics ID, name: ga_id, widget: string, required: false, hint: "Формат: G-XXXXXXXXXX" }
