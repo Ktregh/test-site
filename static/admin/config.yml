@@ -1,7 +1,10 @@
 backend:
   name: github
-  repo: ВАШ-ЮЗЕР/my-company-site   # ← зміни на свій репо
+  repo: Ktregh/test-site
   branch: main
+  site_domain: building-landing.netlify.app   # ← додай цей рядок
+
+site_url: https://building-landing.netlify.app  # ← і цей
 
 media_folder: static/images/uploads
 public_folder: /images/uploads
